@@ -1,0 +1,150 @@
+/* 
+--------------------------------------------
+1. TIPOGRAFÍA EN CSS
+--------------------------------------------
+- La tipografía es esencial para la presentación del texto en la web.
+- CSS ofrece propiedades para personalizar el estilo, tamaño, alineación y espaciado del texto.
+*/
+
+/* 
+--------------------------------------------
+2. FUENTES Y FAMILIAS TIPOGRÁFICAS
+--------------------------------------------
+*/
+
+/* Familia de fuentes */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Prioridad en fuentes */
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif; /* Fuentes con serifas */
+}
+
+/* Importar fuentes externas */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+p {
+    font-family: 'Roboto', sans-serif; /* Fuente importada */
+}
+
+/* 
+--------------------------------------------
+3. TAMAÑO Y PESO DE FUENTE
+--------------------------------------------
+*/
+
+/* Tamaño de fuente */
+h1 {
+    font-size: 2.5rem; /* Tamaño relativo */
+}
+
+p {
+    font-size: 16px; /* Tamaño fijo */
+}
+
+/* Peso de fuente */
+strong {
+    font-weight: bold; /* Fuente en negrita */
+}
+
+.light {
+    font-weight: 300; /* Fuente ligera */
+}
+
+/* 
+--------------------------------------------
+4. ESTILOS Y DECORACIÓN DEL TEXTO
+--------------------------------------------
+*/
+
+/* Estilo de fuente */
+em {
+    font-style: italic; /* Cursiva */
+}
+
+/* Decoración de texto */
+a {
+    text-decoration: none; /* Sin subrayado */
+}
+
+a:hover {
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+/* 
+--------------------------------------------
+5. ESPACIADO Y ALINEACIÓN
+--------------------------------------------
+*/
+
+/* Espaciado entre caracteres */
+h1 {
+    letter-spacing: 2px; /* Espaciado extra entre letras */
+}
+
+/* Espaciado entre palabras */
+p {
+    word-spacing: 5px; /* Espaciado extra entre palabras */
+}
+
+/* Altura de línea */
+body {
+    line-height: 1.6; /* Altura relativa de línea */
+}
+
+/* Alineación del texto */
+h1 {
+    text-align: center; /* Texto centrado */
+}
+
+p {
+    text-align: justify; /* Texto justificado */
+}
+
+/* 
+--------------------------------------------
+6. TRANSFORMACIÓN Y FORMATO
+--------------------------------------------
+*/
+
+/* Transformación del texto */
+h2 {
+    text-transform: uppercase; /* Texto en mayúsculas */
+}
+
+h3 {
+    text-transform: lowercase; /* Texto en minúsculas */
+}
+
+h4 {
+    text-transform: capitalize; /* Primera letra de cada palabra en mayúscula */
+}
+
+/* 
+--------------------------------------------
+7. EJEMPLOS PRÁCTICOS
+--------------------------------------------
+*/
+
+/* Título con estilo personalizado */
+h1.custom-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #2c3e50;
+}
+
+/* Texto resaltado */
+span.highlight {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+}
+
+/* Texto con sombra */
+h2.shadow {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra ligera */
+}
