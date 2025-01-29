@@ -88,7 +88,7 @@ export const resta = (a, b) => a - b;
 ### Renombrar al importar
 ```javascript
 // archivo: app.js
-import { suma as agregar, resta como sustraer } from './operaciones.js';
+import { suma as agregar, resta as sustraer } from './operaciones.js';
 
 console.log(agregar(10, 5)); // 15
 console.log(sustraer(10, 5)); // 5
