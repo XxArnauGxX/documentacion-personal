@@ -1,238 +1,136 @@
-# Fundamentos de CSS
+# Guía Básica de CSS
 
-## 1. Introducción a CSS
+CSS (Cascading Style Sheets) es un lenguaje diseñado para controlar la presentación y el diseño visual de documentos escritos en HTML o XML. Este archivo explora los conceptos básicos de CSS y cómo aplicarlos de manera efectiva en proyectos web.
 
-CSS (Cascading Style Sheets, Hojas de Estilo en Cascada) se utiliza para controlar el diseño y presentación de elementos HTML.
+---
 
-### Estructura básica de una regla CSS
+## ¿Qué es CSS?
+CSS es una herramienta clave en el desarrollo web que permite dar estilo a las páginas, separando el contenido estructural del diseño visual. Esto facilita la creación de interfaces consistentes, atractivas y funcionales.
+
+### Características principales de CSS:
+- **Estilo y diseño**: Proporciona control total sobre colores, fuentes, márgenes, bordes, y más.
+- **Separación de responsabilidades**: Mantiene el HTML limpio y enfocado en el contenido mientras CSS maneja la apariencia.
+- **Compatibilidad multiplataforma**: Permite que los sitios web funcionen correctamente en diferentes dispositivos y navegadores.
+- **Diseño adaptable**: A través de técnicas como media queries, los diseños pueden ajustarse dinámicamente a diferentes tamaños de pantalla.
+- **Modularidad**: Permite dividir los estilos en archivos separados para un mejor mantenimiento.
+
+---
+
+## Sintaxis básica de CSS
+CSS utiliza reglas para aplicar estilos a elementos HTML. Cada regla consta de un selector y un bloque de declaraciones.
+
+### Estructura general:
 ```css
 selector {
     propiedad: valor;
 }
 ```
-- **Selector**: Indica qué elementos serán afectados (ejemplo: etiquetas, clases, IDs).
-- **Propiedad**: Describe la característica que será modificada (ejemplo: color, tamaño).
-- **Valor**: Especifica el valor de esa característica (ejemplo: `red`, `16px`).
 
-#### Ejemplo
+### Ejemplo:
 ```css
-h1 {
-    color: red; /* Cambia el color del texto del h1 a rojo */
+body {
+    background-color: #f0f0f0; /* Color de fondo */
+    font-family: Arial, sans-serif; /* Tipografía */
+    color: #333; /* Color del texto */
+    margin: 0; /* Espaciado externo */
+    padding: 0; /* Espaciado interno */
 }
 ```
+
+#### Componentes:
+1. **Selector**: Define qué elementos serán estilizados (por ejemplo, `body`, `h1`).
+2. **Propiedad**: Indica qué aspecto del elemento se modificará (por ejemplo, `color`, `font-size`).
+3. **Valor**: Especifica el estilo a aplicar (por ejemplo, `#333`, `16px`).
 
 ---
 
-## 2. Selectores básicos
+## Selectores en CSS
+Los selectores son fundamentales para aplicar estilos a elementos específicos dentro del documento HTML. 
 
-### Selector de etiquetas HTML
+### Tipos principales:
+
+1. **Selector universal (`*`)**:
+   Aplica estilos a todos los elementos del documento.
+   ```css
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
+   ```
+
+2. **Selector de etiqueta**:
+   Aplica estilos a todos los elementos de una etiqueta específica.
+   ```css
+   p {
+       font-size: 14px;
+       line-height: 1.5;
+       color: #555;
+   }
+   ```
+
+3. **Selector de clase (`.`)**:
+   Estiliza elementos con una clase específica definida en el HTML.
+   ```css
+   .destacado {
+       color: red;
+       font-weight: bold;
+   }
+   ```
+
+4. **Selector de ID (`#`)**:
+   Estiliza un único elemento con un identificador único.
+   ```css
+   #principal {
+       width: 80%;
+       margin: auto;
+   }
+   ```
+
+5. **Selector de grupo**:
+   Permite aplicar los mismos estilos a múltiples selectores.
+   ```css
+   h1, h2, h3 {
+       font-family: 'Arial', sans-serif;
+       color: #444;
+   }
+   ```
+
+---
+
+## Comentarios en CSS
+Los comentarios son útiles para documentar y explicar partes del código. Son ignorados por el navegador y no afectan el diseño.
+
+### Sintaxis:
 ```css
-h1 {
-    /* Aplica a todos los elementos <h1> */
-}
+/* Comentario de una línea */
+
+/*
+Comentario de varias líneas
+para describir estilos.
+*/
 ```
 
-### Selector de clase
+### Ejemplo práctico:
 ```css
-.titulo {
-    /* Aplica a cualquier elemento con clase 'titulo' */
-}
-```
-
-### Selector de ID
-```css
-#principal {
-    /* Aplica al elemento con ID 'principal' */
-}
-```
-
-### Selectores combinados
-```css
-h1.titulo {
-    /* Solo afecta a los <h1> con clase 'titulo' */
-}
-```
-
-### Selector universal
-```css
-* {
+/* Reset de estilos básicos */
+body {
     margin: 0;
     padding: 0;
-}
-```
-
-### Selector de grupos
-```css
-h1, h2, h3 {
-    /* Aplica a h1, h2 y h3 simultáneamente */
-}
-```
-
-### Selector de descendientes
-```css
-div p {
-    /* Aplica a todos los <p> dentro de un <div> */
-}
-```
-
-### Selector de hijo directo
-```css
-ul > li {
-    /* Aplica a los <li> que son hijos directos de un <ul> */
-}
-```
-
-### Selector de hermanos adyacentes
-```css
-h1 + p {
-    /* Aplica al <p> que está inmediatamente después de un <h1> */
-}
-```
-
-### Selector de hermanos generales
-```css
-h1 ~ p {
-    /* Aplica a todos los <p> que son hermanos de un <h1> */
-}
-```
-
-### Selector de atributos
-```css
-input[type="text"] {
-    /* Aplica a los <input> con atributo type="text" */
-}
-```
-
-### Selectores de pseudo-clases
-```css
-a:hover {
-    /* Aplica estilos cuando el ratón pasa sobre un enlace */
-    text-decoration: underline;
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
 }
 
-ul > li:first-child {
-    /* Aplica estilo al primer hijo de una lista */
+/* Estilo para encabezados */
+h1 {
+    color: navy;
     font-weight: bold;
 }
-
-ul > li:last-child {
-    /* Aplica estilo al último hijo de una lista */
-    color: red;
-}
-
-button:active {
-    /* Estilo del botón cuando es presionado */
-    background-color: grey;
-}
 ```
 
-### Selectores de pseudo-elementos
-```css
-h1::before {
-    /* Agrega contenido antes del texto */
-    content: "\2605 "; /* Estrella */
-}
-
-h1::after {
-    /* Agrega contenido después del texto */
-    content: " \270E"; /* Lápiz */
-}
-```
+### Buenas prácticas:
+- Usar comentarios claros para describir bloques de estilos.
+- Explicar reglas complejas o personalizadas para facilitar la colaboración.
 
 ---
 
-## 3. Importar y herencia
-
-### Importar hojas de estilo
-```css
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
-body {
-    font-family: 'Roboto', sans-serif; /* Fuente importada */
-}
-```
-
-### Herencia
-```css
-body {
-    color: black; /* Color heredado por elementos hijos */
-    font-family: Arial, sans-serif;
-}
-
-p {
-    border: inherit; /* Hereda el borde del elemento padre */
-}
-```
-
-### Valores globales
-```css
-h1 {
-    color: inherit; /* Hereda el color del elemento padre */
-    font-size: initial; /* Restablece al valor predeterminado del navegador */
-    display: unset; /* Restablece el estilo predeterminado */
-}
-```
-
----
-
-## 4. Especificidad
-
-### Ejemplo de especificidad
-```css
-#id {
-    color: blue; /* Prioridad más alta */
-}
-
-.clase {
-    color: green; /* Prioridad media */
-}
-
-div {
-    color: red; /* Prioridad más baja */
-}
-```
-
-### Especificidad acumulada
-```css
-div#id.clase {
-    color: purple; /* ID (100) + clase (10) + etiqueta (1) = 111 */
-}
-```
-
----
-
-## 5. Pseudo-clases y pseudo-elementos avanzados
-
-### Ejemplo de nth-child
-```css
-ul > li:nth-child(odd) {
-    background-color: lightgray; /* Estilo para elementos impares */
-}
-
-ul > li:nth-child(even) {
-    background-color: white; /* Estilo para elementos pares */
-}
-```
-
-### Ejemplo de not
-```css
-div:not(.excluir) {
-    border: 1px solid black; /* Aplica a divs que no tengan clase 'excluir' */
-}
-```
-
----
-
-## 6. Comentarios en CSS
-
-- Usa comentarios para agregar notas o explicaciones en tu código.
-- Los comentarios no afectan el diseño.
-- **Sintaxis**:
-
-```css
-/* Esto es un comentario */
-```
-
-### Ejemplo de comentario
-```css
-/* Este es un ejemplo de comentario */
+Este documento proporciona una introducción a los aspectos básicos de CSS, incluyendo su sintaxis, tipos de selectores y uso de comentarios. Estos fundamentos son esenciales para construir sitios web atractivos y bien estructurados. En los próximos temas, exploraremos conceptos más avanzados, como el modelo de caja y el diseño responsivo.
