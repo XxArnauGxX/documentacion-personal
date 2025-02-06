@@ -1,123 +1,187 @@
-# Almacenamiento Local en JavaScript
+# Almacenamiento en el Navegador: LocalStorage, SessionStorage e Cookies
 
-## Introducción
+## 1. Introducción
 
-El almacenamiento local permite guardar datos directamente en el navegador del usuario para su uso posterior. JavaScript proporciona tres principales métodos de almacenamiento en el cliente:
+El almacenamiento en el navegador permite guardar datos en el cliente sin necesidad de recurrir a una base de datos en el servidor. JavaScript ofrece tres métodos principales de almacenamiento:
 
-1. **`localStorage`**: Almacena datos sin fecha de expiración.
-2. **`sessionStorage`**: Almacena datos solo durante la sesión del navegador.
-3. **Cookies**: Almacena datos pequeños que pueden enviarse automáticamente al servidor con cada solicitud HTTP.
-
-Estas herramientas son útiles para persistir configuraciones, guardar datos temporales y mejorar la experiencia del usuario.
+1. **LocalStorage**: Permite guardar datos de forma persistente en el navegador sin fecha de expiración.
+2. **SessionStorage**: Guarda datos mientras dure la sesión del usuario.
+3. **Cookies**: Pequeños archivos de datos enviados entre el navegador y el servidor, con fecha de expiración opcional.
 
 ---
 
-## Diferencias entre `localStorage`, `sessionStorage` y Cookies
+## 2. LocalStorage
 
-| Característica          | `localStorage`               | `sessionStorage`             | Cookies                       |
-|-------------------------|------------------------------|------------------------------|-------------------------------|
-| **Persistencia**        | Permanente                   | Solo durante la sesión       | Definida por su expiración    |
-| **Capacidad máxima**    | ~5MB                         | ~5MB                         | ~4KB                          |
-| **Envía al servidor**   | No                           | No                           | Sí                            |
-| **Compatibilidad**      | Navegadores modernos         | Navegadores modernos         | Amplia, pero limitada         |
+El **LocalStorage** permite almacenar datos de manera persistente en el navegador. Los datos se conservan incluso si se cierra y se vuelve a abrir el navegador.
+
+### 2.1 Métodos Principales de `localStorage`
+
+- **Guardar un dato:**
+```js
+localStorage.setItem("nombre", "Juan");
+```
+
+- **Obtener un dato:**
+```js
+let nombre = localStorage.getItem("nombre");
+console.log(nombre); // "Juan"
+```
+
+- **Eliminar un dato específico:**
+```js
+localStorage.removeItem("nombre");
+```
+
+- **Eliminar todos los datos guardados:**
+```js
+localStorage.clear();
+```
+
+- **Almacenar objetos en `localStorage` (usando `JSON.stringify`)**:
+```js
+let usuario = { nombre: "Ana", edad: 25 };
+localStorage.setItem("usuario", JSON.stringify(usuario));
+```
+
+- **Obtener objetos de `localStorage` (usando `JSON.parse`)**:
+```js
+let usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
+console.log(usuarioGuardado.nombre); // "Ana"
+```
+
+### 2.2 Consideraciones
+- Solo almacena **strings**, por lo que los objetos deben ser convertidos con `JSON.stringify`.
+- Puede almacenar hasta **5MB** de datos.
+- Los datos **persisten** hasta que se eliminen manualmente o se borren los datos del navegador.
 
 ---
 
-## Uso de `localStorage` y `sessionStorage`
+## 3. SessionStorage
 
-### Operaciones Básicas
+El **SessionStorage** funciona de manera similar a `localStorage`, pero los datos solo permanecen mientras dure la sesión del usuario (hasta que se cierre la pestaña o ventana del navegador).
 
-#### Guardar datos
-Usa el método `setItem` para guardar datos en el almacenamiento.
-```javascript
-localStorage.setItem('nombre', 'Juan');
-sessionStorage.setItem('edad', '30');
+### 3.1 Métodos Principales de `sessionStorage`
+
+- **Guardar un dato:**
+```js
+sessionStorage.setItem("pais", "España");
 ```
 
-#### Obtener datos
-Usa el método `getItem` para recuperar datos almacenados.
-```javascript
-const nombre = localStorage.getItem('nombre');
-const edad = sessionStorage.getItem('edad');
-console.log(`Nombre: ${nombre}, Edad: ${edad}`);
+- **Obtener un dato:**
+```js
+console.log(sessionStorage.getItem("pais")); // "España"
 ```
 
-#### Eliminar datos
-Usa el método `removeItem` para eliminar un elemento específico.
-```javascript
-localStorage.removeItem('nombre');
+- **Eliminar un dato específico:**
+```js
+sessionStorage.removeItem("pais");
 ```
 
-#### Limpiar todo
-Usa el método `clear` para eliminar todos los datos almacenados.
-```javascript
+- **Eliminar todos los datos guardados:**
+```js
 sessionStorage.clear();
 ```
 
+### 3.2 Diferencias entre `localStorage` y `sessionStorage`
+| Característica    | LocalStorage | SessionStorage |
+|-----------------|-------------|---------------|
+| Duración       | Permanente  | Se elimina al cerrar la pestaña |
+| Capacidad      | ~5MB        | ~5MB |
+| Ámbito         | Disponible en todas las pestañas | Solo en la pestaña actual |
+
 ---
 
-## Uso de Cookies
+## 4. Cookies
 
-### Crear y Leer Cookies
+Las **cookies** son pequeños archivos de texto que el navegador guarda y que pueden ser enviadas al servidor con cada solicitud HTTP. Se utilizan para almacenar información de sesión, preferencias del usuario y datos de autenticación.
 
-#### Crear una cookie
-```javascript
-document.cookie = "usuario=Juan; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/";
-```
-- **`usuario=Juan`**: Define el nombre y valor de la cookie.
-- **`expires`**: Especifica la fecha de expiración.
-- **`path`**: Determina en qué rutas estará disponible la cookie.
-
-#### Leer cookies
-```javascript
-console.log(document.cookie); // usuario=Juan
+### 4.1 Crear una Cookie
+```js
+document.cookie = "usuario=Juan; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/";
 ```
 
-#### Eliminar cookies
-```javascript
+Explicación:
+- **`usuario=Juan`** → Clave y valor de la cookie.
+- **`expires=...`** → Fecha de expiración.
+- **`path=/`** → La cookie estará disponible en toda la página web.
+
+### 4.2 Leer Cookies
+```js
+console.log(document.cookie);
+```
+Salida:
+```
+usuario=Juan
+```
+
+### 4.3 Modificar una Cookie
+Para modificar una cookie, simplemente hay que volver a declararla con el mismo nombre y un nuevo valor:
+```js
+document.cookie = "usuario=Ana; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/";
+```
+
+### 4.4 Eliminar una Cookie
+Para eliminar una cookie, se debe establecer su fecha de expiración en el pasado:
+```js
 document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 ```
 
-### Opciones Avanzadas
+### 4.5 Convertir Cookies en un Objeto JavaScript
+```js
+function obtenerCookies() {
+    let cookies = document.cookie.split("; ");
+    let resultado = {};
+    cookies.forEach(cookie => {
+        let [clave, valor] = cookie.split("=");
+        resultado[clave] = valor;
+    });
+    return resultado;
+}
 
-- **`HttpOnly`**: Impide que las cookies sean accesibles desde JavaScript.
-- **`Secure`**: Permite enviar cookies solo a través de conexiones HTTPS.
-- **`SameSite`**: Restricción para compartir cookies entre sitios.
+console.log(obtenerCookies());
+```
 
 ---
 
-## Ejemplos Prácticos
+## 5. Web Storage vs Cookies: ¿Cuál usar?
+| Característica  | LocalStorage/SessionStorage | Cookies |
+|---------------|-------------------------|---------|
+| Capacidad    | ~5MB                     | ~4KB    |
+| Persistencia | LocalStorage: permanente, SessionStorage: sesión | Se puede definir una fecha de expiración |
+| Disponibilidad | Solo en el cliente       | Se envía con cada petición HTTP |
+| Seguridad     | Más seguro, no se envía automáticamente | Se envía en cada solicitud HTTP |
 
-### Guardar configuraciones de usuario
-```javascript
-// Guardar tema seleccionado
-localStorage.setItem('tema', 'oscuro');
+---
 
-// Recuperar el tema seleccionado
-const tema = localStorage.getItem('tema');
-if (tema) {
-    document.body.classList.add(tema);
-}
-```
+## 6. IndexedDB (Almacenamiento Avanzado)
 
-### Contador de visitas con cookies
-```javascript
-const obtenerCookie = (nombre) => {
-    const valor = document.cookie.match('(^|;)\\s*' + nombre + '\\s*=\\s*([^;]+)');
-    return valor ? valor.pop() : null;
+**IndexedDB** es una base de datos del lado del cliente más avanzada, capaz de almacenar grandes volúmenes de datos en el navegador.
+
+Ejemplo de uso básico de IndexedDB:
+```js
+let db;
+let request = indexedDB.open("MiBaseDeDatos", 1);
+
+request.onsuccess = function(event) {
+    db = event.target.result;
+    console.log("Base de datos abierta");
 };
 
-const visitas = obtenerCookie('visitas') || 0;
-document.cookie = `visitas=${+visitas + 1}; path=/`;
-console.log(`Has visitado esta página ${+visitas + 1} veces.`);
+request.onupgradeneeded = function(event) {
+    let db = event.target.result;
+    db.createObjectStore("usuarios", { keyPath: "id" });
+};
 ```
+
+Beneficios de IndexedDB:
+- Permite almacenar grandes cantidades de datos estructurados.
+- Funciona con transacciones y permite consultas avanzadas.
+- Ideal para aplicaciones web progresivas (PWAs).
 
 ---
 
-## Buenas Prácticas
+## 7. Conclusión
 
-1. **Usa `localStorage` para datos no sensibles:** Evita almacenar información confidencial.
-2. **Valida datos antes de almacenarlos:** Asegúrate de guardar solo datos necesarios y en el formato correcto.
-3. **Cuidado con las cookies:** No almacenes datos sensibles sin cifrado.
-4. **Prueba en distintos navegadores:** Asegúrate de que el comportamiento sea consistente.
-5. **Usa nombres únicos para claves:** Evita conflictos con otras aplicaciones.
+- **LocalStorage** y **SessionStorage** son ideales para almacenar datos en el navegador sin comunicación con el servidor.
+- **Cookies** son útiles para datos pequeños que deben enviarse al servidor en cada solicitud.
+- **IndexedDB** es una opción avanzada para almacenar grandes volúmenes de datos estructurados.

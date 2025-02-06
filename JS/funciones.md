@@ -1,158 +1,196 @@
-# Funciones en JavaScript
+# Funciones y Funciones Nativas en JavaScript
 
-## Introducción
+## 1. Introducción a las Funciones en JavaScript
 
-Las funciones son bloques de código reutilizables diseñados para realizar una tarea específica. Una función puede recibir entradas (parámetros), procesarlas y devolver un resultado. Son fundamentales para estructurar y organizar el código en JavaScript.
+Las funciones en JavaScript permiten encapsular lógica reutilizable. Son bloques de código diseñados para ejecutar una tarea específica y se pueden definir de varias formas con diferentes características avanzadas.
 
-### Ventajas de usar funciones
-- Evitan la repetición de código.
-- Mejoran la legibilidad y el mantenimiento del programa.
-- Facilitan la depuración y prueba de pequeños bloques de código.
+### 1.1 ¿Qué es una función?
+Una función es un conjunto de instrucciones que realiza una tarea específica y puede ser invocada múltiples veces sin repetir el código.
+
+```js
+function saludar() {
+    console.log("¡Hola, mundo!");
+}
+
+saludar(); // Llama a la función
+```
+
+Beneficios de usar funciones:
+- **Reutilización de código**: Evita la duplicación.
+- **Modularidad**: Divide el código en partes manejables.
+- **Legibilidad**: Hace que el código sea más comprensible.
 
 ---
 
-## Declaración de Funciones
+## 2. Tipos de Funciones en JavaScript
 
-### Función tradicional
+### 2.1 Funciones Declaradas
+Estas funciones pueden ser llamadas antes de su declaración gracias al **hoisting**.
 
-Se define usando la palabra clave `function` seguida del nombre de la función.
-
-#### Ejemplo
-```javascript
-function saludar(nombre) {
-    return `Hola, ${nombre}!`;
+```js
+function sumar(a, b) {
+    return a + b;
 }
 
-console.log(saludar('Ana')); // Hola, Ana!
+console.log(sumar(3, 5)); // 8
 ```
 
-### Función anónima
+### 2.2 Funciones Expresadas
+Estas funciones se asignan a una variable y **no son elevadas (hoisted)**, lo que significa que deben definirse antes de ser usadas.
 
-Una función sin nombre asignada a una variable.
-
-#### Ejemplo
-```javascript
-const sumar = function(a, b) {
-    return a + b;
+```js
+const restar = function(a, b) {
+    return a - b;
 };
 
-console.log(sumar(5, 3)); // 8
+console.log(restar(10, 4)); // 6
 ```
 
-### Función flecha (Arrow Function)
+### 2.3 Funciones Flecha (`Arrow Functions`)
+Una sintaxis más corta y moderna para definir funciones.
 
-Introducida en ES6, es una forma más concisa de declarar funciones. Sin embargo, no tiene su propio contexto `this`.
-
-#### Ejemplo
-```javascript
+```js
 const multiplicar = (a, b) => a * b;
+console.log(multiplicar(3, 4)); // 12
+```
 
-console.log(multiplicar(4, 2)); // 8
+Si hay un solo parámetro, los paréntesis pueden omitirse:
+```js
+const cuadrado = x => x * x;
+console.log(cuadrado(5)); // 25
+```
+
+Ventajas de las funciones flecha:
+- Sintaxis más corta y clara.
+- No tienen su propio `this`, lo que evita problemas de contexto en objetos y clases.
+
+### 2.4 Funciones Anónimas
+Son funciones sin nombre, utilizadas generalmente en callbacks.
+
+```js
+setTimeout(function() {
+    console.log("Esto se ejecuta después de 3 segundos");
+}, 3000);
+```
+
+### 2.5 Funciones Autoejecutadas (IIFE)
+Se ejecutan inmediatamente después de ser definidas y son útiles para evitar la contaminación del ámbito global.
+
+```js
+(function() {
+    console.log("Soy una función autoejecutada");
+})();
 ```
 
 ---
 
-## Parámetros y Argumentos
+## 3. Parámetros y Valores Predeterminados
 
-### Parámetros por defecto
+### 3.1 Parámetros en Funciones
+Los parámetros permiten que una función reciba valores y los use en su ejecución.
 
-Permiten establecer valores por defecto en caso de que no se pase un argumento.
-
-#### Ejemplo
-```javascript
-function saludar(nombre = 'Visitante') {
-    return `Hola, ${nombre}!`;
+```js
+function presentar(nombre, edad) {
+    console.log(`Hola, me llamo ${nombre} y tengo ${edad} años.`);
 }
 
-console.log(saludar()); // Hola, Visitante!
+presentar("Carlos", 30);
 ```
 
-### Parámetros Rest
+### 3.2 Parámetros con Valores Predeterminados
+Si no se proporciona un valor al llamar a la función, se usará el valor por defecto.
 
-Permiten agrupar múltiples argumentos en un array.
+```js
+function saludar(nombre = "Usuario") {
+    console.log(`Hola, ${nombre}`);
+}
 
-#### Ejemplo
-```javascript
-function sumarTodos(...numeros) {
+saludar(); // "Hola, Usuario"
+saludar("Ana"); // "Hola, Ana"
+```
+
+### 3.3 Parámetro `Rest` (`...`)
+Permite pasar múltiples valores como un array.
+
+```js
+function sumarNumeros(...numeros) {
     return numeros.reduce((total, num) => total + num, 0);
 }
 
-console.log(sumarTodos(1, 2, 3, 4)); // 10
+console.log(sumarNumeros(1, 2, 3, 4, 5)); // 15
 ```
 
 ---
 
-## Alcance y Contexto
+## 4. Scope y Closures
 
-### Alcance de variables
+### 4.1 Scope (Ámbito de las variables)
+El scope determina dónde una variable puede ser accedida.
 
-El alcance determina dónde es accesible una variable dentro de una función o bloque.
+```js
+let global = "Soy global";
 
-#### Ejemplo
-```javascript
 function ejemplo() {
-    let local = 'Dentro de la función';
-    console.log(local); // OK
+    let local = "Soy local";
+    console.log(global); // Accede a variable global
 }
 
-// console.log(local); // Error: local no está definido
+ejemplo();
+// console.log(local); // Error: local no está definida fuera de la función
 ```
 
-### El contexto `this`
+### 4.2 Closures
+Un closure es una función que recuerda el estado de su ámbito exterior incluso después de que se haya ejecutado.
 
-`this` hace referencia al objeto desde el cual se invoca la función.
-
-#### Ejemplo
-```javascript
-const persona = {
-    nombre: 'Juan',
-    saludar() {
-        console.log(`Hola, soy ${this.nombre}`);
-    }
-};
-
-persona.saludar(); // Hola, soy Juan
-```
-
----
-
-## Funciones como Objetos de Primera Clase
-
-En JavaScript, las funciones son objetos de primera clase, lo que significa que pueden:
-
-- Ser asignadas a variables.
-- Ser pasadas como argumentos a otras funciones.
-- Ser devueltas por otras funciones.
-
-#### Ejemplo
-```javascript
-function operar(a, b, operacion) {
-    return operacion(a, b);
+```js
+function crearContador() {
+    let contador = 0;
+    return function() {
+        contador++;
+        return contador;
+    };
 }
 
-const sumar = (x, y) => x + y;
-const restar = (x, y) => x - y;
-
-console.log(operar(10, 5, sumar)); // 15
-console.log(operar(10, 5, restar)); // 5
+const incrementar = crearContador();
+console.log(incrementar()); // 1
+console.log(incrementar()); // 2
 ```
 
 ---
 
-## Buenas Prácticas
+## 5. Funciones Nativas de JavaScript
 
-- Usa nombres descriptivos para las funciones que reflejen claramente su propósito.
-- Divide el código en funciones pequeñas y reutilizables.
-- Evita efectos secundarios: limita el uso de variables globales dentro de las funciones.
-- Usa funciones flecha para mantener un código más limpio y conciso, excepto cuando se requiera el uso de `this`.
-- Documenta tus funciones con comentarios para indicar qué hacen y qué parámetros reciben.
+JavaScript proporciona varias funciones predefinidas que se pueden usar en cualquier momento.
 
-#### Ejemplo
-```javascript
-// Nombre descriptivo
-function calcularPromedio(numeros) {
-    return numeros.reduce((total, num) => total + num, 0) / numeros.length;
-}
+### 5.1 Funciones Globales
+```js
+console.log(parseInt("10")); // 10
+console.log(parseFloat("3.14")); // 3.14
+console.log(isNaN("hola")); // true (No es un número)
+console.log(eval("3 + 5")); // 8 (Ejecuta código JavaScript como string)
+```
 
-console.log(calcularPromedio([10, 20, 30])); // 20
+### 5.2 Métodos de Cadenas (`String`)
+```js
+let texto = "JavaScript";
+console.log(texto.length); // 10
+console.log(texto.toUpperCase()); // "JAVASCRIPT"
+console.log(texto.toLowerCase()); // "javascript"
+console.log(texto.includes("Script")); // true
+```
+
+### 5.3 Métodos de Números (`Number` y `Math`)
+```js
+console.log(Math.random()); // Número aleatorio entre 0 y 1
+console.log(Math.floor(3.8)); // 3 (Redondea hacia abajo)
+console.log(Math.ceil(3.2)); // 4 (Redondea hacia arriba)
+console.log(Math.pow(2, 3)); // 8 (Potencia 2^3)
+```
+
+### 5.4 Métodos de Arrays
+```js
+let numeros = [1, 2, 3, 4, 5];
+console.log(numeros.map(x => x * 2)); // [2, 4, 6, 8, 10]
+console.log(numeros.filter(x => x > 3)); // [4, 5]
+console.log(numeros.reduce((a, b) => a + b, 0)); // 15
 ```

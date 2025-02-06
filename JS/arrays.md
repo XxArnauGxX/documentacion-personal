@@ -1,164 +1,172 @@
 # Arrays en JavaScript
 
-## Introducción
+## 1. Introducción a los Arrays
 
-Los arrays en JavaScript son estructuras de datos utilizadas para almacenar múltiples valores en una sola variable. Los elementos de un array pueden ser de cualquier tipo, incluyendo números, cadenas, objetos y hasta otros arrays.
+Los **arrays** en JavaScript son estructuras de datos que permiten almacenar múltiples valores en una sola variable. Se pueden manipular utilizando una amplia variedad de métodos incorporados en JavaScript.
 
-### Características principales
-- Los elementos de un array están indexados, comenzando desde 0.
-- Los arrays son dinámicos, lo que significa que su tamaño puede cambiar.
-- Los arrays son un tipo especial de objeto.
-
----
-
-## Creación de Arrays
-
-### Array literal
-La forma más común de crear un array es utilizando corchetes `[]`.
-
-#### Ejemplo
-```javascript
-const numeros = [1, 2, 3, 4, 5];
-console.log(numeros[0]); // 1
+```js
+let frutas = ["Manzana", "Banana", "Naranja"];
+console.log(frutas); // ["Manzana", "Banana", "Naranja"]
 ```
 
-### Constructor `Array`
-Otra forma de crear un array es utilizando el constructor `Array`.
-
-#### Ejemplo
-```javascript
-const frutas = new Array('manzana', 'plátano', 'cereza');
-console.log(frutas[1]); // plátano
+Los elementos de un array están indexados comenzando desde `0`, por lo que:
+```js
+console.log(frutas[0]); // "Manzana"
+console.log(frutas[1]); // "Banana"
 ```
 
 ---
 
-## Métodos básicos de Arrays
+## 2. Métodos Básicos de Arrays
 
-### Agregar y eliminar elementos
+### 2.1 Agregar y Eliminar Elementos
 
-#### `push` y `pop`
-- **`push`**: Agrega uno o más elementos al final del array.
-- **`pop`**: Elimina el último elemento del array.
-
-```javascript
-const numeros = [1, 2, 3];
-numeros.push(4); // [1, 2, 3, 4]
-numeros.pop(); // [1, 2, 3]
+- **`push()`** → Agrega un elemento al final del array.
+```js
+frutas.push("Uva");
+console.log(frutas); // ["Manzana", "Banana", "Naranja", "Uva"]
 ```
 
-#### `shift` y `unshift`
-- **`shift`**: Elimina el primer elemento del array.
-- **`unshift`**: Agrega uno o más elementos al inicio del array.
-
-```javascript
-const colores = ['rojo', 'azul', 'verde'];
-colores.shift(); // ['azul', 'verde']
-colores.unshift('amarillo'); // ['amarillo', 'azul', 'verde']
+- **`pop()`** → Elimina el último elemento del array.
+```js
+frutas.pop();
+console.log(frutas); // ["Manzana", "Banana", "Naranja"]
 ```
 
----
-
-## Iteración de Arrays
-
-### Usando bucles
-
-#### `for`
-```javascript
-const numeros = [1, 2, 3, 4];
-for (let i = 0; i < numeros.length; i++) {
-    console.log(numeros[i]);
-}
+- **`unshift()`** → Agrega un elemento al inicio del array.
+```js
+frutas.unshift("Pera");
+console.log(frutas); // ["Pera", "Manzana", "Banana", "Naranja"]
 ```
 
-#### `for...of`
-```javascript
-for (const numero of numeros) {
-    console.log(numero);
-}
+- **`shift()`** → Elimina el primer elemento del array.
+```js
+frutas.shift();
+console.log(frutas); // ["Manzana", "Banana", "Naranja"]
 ```
 
-#### `forEach`
-```javascript
-numeros.forEach(numero => console.log(numero));
+### 2.2 Obtener la Longitud de un Array
+```js
+console.log(frutas.length); // 3
 ```
 
 ---
 
-## Métodos avanzados de Arrays
+## 3. Métodos de Iteración en Arrays
 
-### `map`
-Crea un nuevo array aplicando una función a cada elemento del array original.
-
-#### Ejemplo
-```javascript
-const numeros = [1, 2, 3];
-const cuadrados = numeros.map(num => num ** 2);
-console.log(cuadrados); // [1, 4, 9]
+### 3.1 `forEach()`
+Ejecuta una función para cada elemento del array.
+```js
+frutas.forEach(fruta => console.log(fruta));
 ```
 
-### `filter`
-Crea un nuevo array con todos los elementos que cumplan una condición.
-
-#### Ejemplo
-```javascript
-const numeros = [1, 2, 3, 4];
-const pares = numeros.filter(num => num % 2 === 0);
-console.log(pares); // [2, 4]
+### 3.2 `map()`
+Crea un nuevo array aplicando una función a cada elemento.
+```js
+let frutasEnMayuscula = frutas.map(fruta => fruta.toUpperCase());
+console.log(frutasEnMayuscula); // ["MANZANA", "BANANA", "NARANJA"]
 ```
 
-### `reduce`
-Aplica una función a un acumulador y a cada elemento del array para reducirlo a un solo valor.
-
-#### Ejemplo
-```javascript
-const numeros = [1, 2, 3, 4];
-const suma = numeros.reduce((total, num) => total + num, 0);
-console.log(suma); // 10
+### 3.3 `filter()`
+Crea un nuevo array con los elementos que cumplen una condición.
+```js
+let frutasFiltradas = frutas.filter(fruta => fruta.startsWith("B"));
+console.log(frutasFiltradas); // ["Banana"]
 ```
 
----
-
-## Operaciones comunes con Arrays
-
-### Concatenación
-Combina dos o más arrays en uno solo.
-
-#### Ejemplo
-```javascript
-const a = [1, 2];
-const b = [3, 4];
-const combinado = a.concat(b);
-console.log(combinado); // [1, 2, 3, 4]
-```
-
-### Copia de Arrays
-Usa el operador de propagación (`...`) para copiar un array.
-
-#### Ejemplo
-```javascript
-const original = [1, 2, 3];
-const copia = [...original];
-copia.push(4);
-console.log(original); // [1, 2, 3]
-console.log(copia); // [1, 2, 3, 4]
-```
-
-### Desestructuración
-Extrae elementos de un array en variables individuales.
-
-#### Ejemplo
-```javascript
-const numeros = [1, 2, 3];
-const [primero, segundo] = numeros;
-console.log(primero, segundo); // 1 2
+### 3.4 `reduce()`
+Reduce el array a un único valor.
+```js
+let numeros = [1, 2, 3, 4, 5];
+let suma = numeros.reduce((acumulador, numero) => acumulador + numero, 0);
+console.log(suma); // 15
 ```
 
 ---
 
-## Buenas Prácticas
+## 4. Métodos de Búsqueda y Modificación
 
-- Usa nombres descriptivos para los arrays.
-- Evita modificar los arrays originales; usa métodos que devuelvan nuevos arrays (`map`, `filter`).
-- Siempre verifica el índice o la longitud del array antes de acceder a elementos para evitar errores.
-- Usa `forEach`, `map`, y otros métodos en lugar de bucles manuales siempre que sea posible.
+### 4.1 `find()`
+Devuelve el primer elemento que cumple una condición.
+```js
+let encontrado = frutas.find(fruta => fruta.length > 6);
+console.log(encontrado); // "Banana"
+```
+
+### 4.2 `some()`
+Verifica si al menos un elemento cumple una condición.
+```js
+console.log(frutas.some(fruta => fruta.length > 10)); // false
+```
+
+### 4.3 `every()`
+Verifica si **todos** los elementos cumplen una condición.
+```js
+console.log(frutas.every(fruta => fruta.length > 3)); // true
+```
+
+### 4.4 `includes()`
+Verifica si un valor existe en el array.
+```js
+console.log(frutas.includes("Manzana")); // true
+console.log(frutas.includes("Sandía")); // false
+```
+
+### 4.5 `indexOf()` y `lastIndexOf()`
+Encuentra la posición de un elemento.
+```js
+console.log(frutas.indexOf("Banana")); // 1
+```
+
+---
+
+## 5. Ordenamiento y Transformación de Arrays
+
+### 5.1 `sort()`
+Ordena el array alfabéticamente.
+```js
+frutas.sort();
+console.log(frutas); // ["Banana", "Manzana", "Naranja"]
+```
+
+### 5.2 `reverse()`
+Invierte el orden del array.
+```js
+frutas.reverse();
+console.log(frutas); // ["Naranja", "Manzana", "Banana"]
+```
+
+### 5.3 `join()`
+Convierte el array en un string.
+```js
+console.log(frutas.join(", ")); // "Naranja, Manzana, Banana"
+```
+
+### 5.4 `split()`
+Convierte un string en un array.
+```js
+let cadena = "JavaScript, Python, C++";
+let lenguajes = cadena.split(", ");
+console.log(lenguajes); // ["JavaScript", "Python", "C++"]
+```
+
+---
+
+## 6. Arrays Multidimensionales
+
+Los **arrays multidimensionales** son arrays que contienen otros arrays como elementos.
+```js
+let matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+console.log(matriz[1][2]); // 6
+```
+
+### 6.1 `flat()`
+Convierte un array multidimensional en un array plano.
+```js
+let anidado = [1, [2, 3], [4, 5, [6, 7]]];
+console.log(anidado.flat(2)); // [1, 2, 3, 4, 5, 6, 7]
+```
