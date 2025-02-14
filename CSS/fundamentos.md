@@ -141,6 +141,7 @@ Los **selectores** permiten elegir qué elementos serán estilizados.
 ## 📌 Especificidad y Herencia en CSS
 ### 📊 **Reglas de especificidad**
 CSS usa un sistema de prioridad cuando se aplican múltiples reglas a un mismo elemento:
+
 1️⃣ **Estilos en línea** (`style=""`) → Mayor prioridad.  
 2️⃣ **Selectores de ID** (`#id`).  
 3️⃣ **Selectores de clase, atributos y pseudo-clases** (`.clase`, `[atributo]`, `:hover`).  
