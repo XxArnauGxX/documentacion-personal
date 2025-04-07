@@ -2,7 +2,7 @@
 
 ## 1. Què són
 
-Les _superglobals_ en PHP són variables predefinides que es poden accedir des de qualsevol _scope_ (aàmbit) del codi, independentment d'on es trobin. PHP proporciona diverses superglobals, cadascuna amb una funcionalitat específica:
+Les _superglobals_ en PHP són variables predefinides que es poden accedir des de qualsevol _scope_ (àmbit) del codi, independentment d'on es trobin. PHP proporciona diverses superglobals, cadascuna amb una funcionalitat específica:
 
 - `$GLOBALS`
 - `$_SERVER`
