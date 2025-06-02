@@ -82,7 +82,7 @@ Permiten combinar condiciones lógicas:
 | -------- | ------ | ----------- | ------------------------ | --- | ---------------------- |
 | &&       | AND    | \$a && \$b  | true si ambos son true   |     |                        |
 | and      | AND    | \$a and \$b | igual que &&             |     |                        |
-| \|\|     | OR     | \$a         |                          | \$b | true si alguno es true |
+| \|\|     | OR     | \$a \|\| \$b | true si alguno es true |
 | or       | OR     | \$a or \$b  | igual que                |     |                        |
 | !        | NOT    | !\$a        | true si \$a es false     |     |                        |
 | xor      | XOR    | \$a xor \$b | true si solo uno es true |     |                        |
